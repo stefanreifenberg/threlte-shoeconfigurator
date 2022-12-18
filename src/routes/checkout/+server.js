@@ -31,7 +31,7 @@ export async function POST({ request }) {
 					currency: 'usd',
 					unit_amount: 7900,
 					product_data: {
-						name: 'Custom Shoe',
+						name: 'Custom Shoe yay',
 						description
 						//metadata
 					}
