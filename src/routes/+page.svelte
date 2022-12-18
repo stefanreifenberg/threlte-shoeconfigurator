@@ -51,5 +51,40 @@
     width: 10em;
     height: 10em;
 }
+
+/* mobile styles for the color picker */
+@media only screen and (max-width: 600px) {
+    .color-picker-div {
+        position: fixed;
+        top: 70%;
+        left: 25%;
+        width: 300px;
+    }
+
+    :global(.color-picker > label) {
+        font-size: 20px;
+    }
+
+
+    :global(.color-picker > label > div) {
+        width: 1em;
+        height: 1em;
+    }
+
+    :global(.color-picker > label > div > input) {
+        width: 5em;
+        height: 5em;
+    }
+    :global(.picker-wrapper ) {
+        width: 100px !important;
+        height: 100px !important;
+    }
+    :global(.color-picker) {
+        --picker-width: 100px;
+        --picker-height: 100px;
+    }
+
+}
+
 </style>
   
