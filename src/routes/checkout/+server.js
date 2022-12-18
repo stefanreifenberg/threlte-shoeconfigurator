@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
 import Stripe from 'stripe';
-import { STRIPE_SECRET_KEY, DOMAIN } from '$env';
+import { STRIPE_SECRET_KEY, DOMAIN } from '$env/static/private';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY);
 const success_url = absoluteURL('/checkout/success');
