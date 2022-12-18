@@ -8,15 +8,16 @@
   
 <div class="canvas-wrapper">
     <Canvas>
-        <Scene color={hex}/>
+        <Scene color={hex} />
     </Canvas>
 </div>
 
 <div class="color-picker-div">
-    <ColorPicker bind:hex label="hallo" isOpen isAlpha={false}/>
+    <ColorPicker bind:hex label="Pick a color 
+    " isOpen isPopup={false} isAlpha={false}/>
 </div>
 
-<style>
+<style lang="">
 .canvas-wrapper {
     position: fixed;
     top: 0;
@@ -30,10 +31,25 @@
 }
 
 .color-picker-div {
-        position: absolute;
-        top: 50;
-        left: 50;
-        z-index: 100;
-    }
+        position: fixed;
+        top: 45%;
+        left: 10%;
+        width: 300px;
+}
+
+:global(.color-picker > label) {
+    font-size: 40px;
+}
+
+
+:global(.color-picker > label > div) {
+    width: 3em;
+    height: 3em;
+}
+
+:global(.color-picker > label > div > input) {
+    width: 10em;
+    height: 10em;
+}
 </style>
   

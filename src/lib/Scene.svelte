@@ -66,18 +66,19 @@ const createRandomColors = () => {
 </script>
 
 
-
-
+<HTML position={{x:0.5, y: 1 }} transform>
+    <button
+      on:click={createRandomColors}
+      class="random-button hover:opacity-90 active:opacity-70"
+    >
+      Randomize colors
+    </button>
+</HTML>
 
 {#if $gltf}
  <Float>
    
   <T.Group position={[0, 0, 0]}>
-
-    
-
-
-    <button on:click={() => createRandomColors()}>Random colors</button>
     <!-- Laces -->
     <T.Mesh 
         let:ref 
@@ -207,8 +208,6 @@ const createRandomColors = () => {
             on:pointerleave={onPointerLeave}
             />
     </T.Mesh>
-   
-
     <!-- Patch -->
     <T.Mesh 
         let:ref 
@@ -231,29 +230,27 @@ const createRandomColors = () => {
 </Float>
 {/if}
 
-<!-- create a box  -->
-<T.Mesh position={[4, 0, 0]} castShadow let:ref>
-    <T.BoxBufferGeometry attach="geometry" args={[1, 1, 1]} />
-    <T.MeshStandardMaterial attach="material" color="hotpink" />
-    <InteractiveObject 
-            object={ref}
-            interactive 
-            on:click={createRandomColors} 
-           
-            />
-</T.Mesh>
-
-
 <ContactShadows scale={5} blur={2.4} far={2.5} opacity={0.4} position={{ y: -1 }}/>
 <!-- <Environment path="/hdr/" files="potsdamer_platz_1k.hdr" isBackground={false}/> -->
 <T.AmbientLight intensity={0.7} />
 <T.SpotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} castShadow />
 
-<T.PerspectiveCamera makeDefault near={0.1} far={1000} zoom={1} position={[-4, 4, 4]}>
+<T.PerspectiveCamera makeDefault near={0.1} far={1000} zoom={1} position={[0, 2, 4]}>
     <OrbitControls 
          enableDamping
          enableZoom={false}
-         target={{ y: 0.5 }}
           />
 </T.PerspectiveCamera>
 
+<style>
+    .random-button {
+        position: fixed;
+        bottom:0;
+        right:0;
+        background: #fff;
+        border: 0.5px solid #ccc;
+        border-radius: 4px;
+        font-size: 5px;
+        cursor: pointer;
+    }
+</style>
