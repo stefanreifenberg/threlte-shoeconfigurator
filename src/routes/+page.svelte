@@ -11,12 +11,7 @@
 		const response = await fetch('/checkout', {
 			method: 'POST',
 			body: JSON.stringify({
-				quantity: 1,
-				options: {
-					color: selectedColor.name,
-					back: selectedBack.name,
-					stretcher
-				}
+				quantity: 1
 			})
 		});
 		const { url } = await response.json();
@@ -68,7 +63,7 @@
 }
 
 :global(.color-picker > label) {
-    font-size: 40px;
+    font-size: 30px;
 }
 
 
@@ -78,8 +73,9 @@
 }
 
 :global(.color-picker > label > div > input) {
-    width: 10em;
-    height: 10em;
+    width: 5em;
+    height: 5em;
+	border-radius: 50%;
 }
 
 /* mobile styles for the color picker */

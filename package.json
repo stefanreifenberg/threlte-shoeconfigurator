@@ -21,6 +21,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"stripe": "^11.4.0",
 		"svelte-preprocess": "^5.0.0"
 	}
 }
