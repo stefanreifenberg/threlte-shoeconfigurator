@@ -27,8 +27,8 @@
 </div>
 
 <div class="color-picker-div">
-    <ColorPicker bind:hex label="Pick a color 
-    " isOpen isPopup={false} isAlpha={false}/>
+    <ColorPicker bind:hex label="Pick a color and apply it to the model 
+    " isOpen={false} isPopup={false} isAlpha={false}/>
 </div>
 
 <section class="cta">
@@ -63,7 +63,7 @@
 }
 
 :global(.color-picker > label) {
-    font-size: 30px;
+    font-size: 20px;
 }
 
 
@@ -73,9 +73,8 @@
 }
 
 :global(.color-picker > label > div > input) {
-    width: 5em;
-    height: 5em;
-	border-radius: 50%;
+    width: 3em;
+    height: 3em;
 }
 
 /* mobile styles for the color picker */
@@ -119,16 +118,17 @@
 		padding: 1rem;
 	}
 	.cta button {
-		background: #6e37ca;
-		color: white;
+		background: white;
+		color: black;
 		font-size: 1.3rem;
-		border: none;
+		border: 1px solid #8460bf;
 		border-radius: 3px;
 		padding: 1rem;
 		width: 100%;
 	}
 	.cta button:hover {
 		background: #8460bf;
+        color: white;
 	}
 	@media screen and (min-width: 480px) {
 		

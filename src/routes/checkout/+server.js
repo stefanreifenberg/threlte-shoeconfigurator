@@ -16,7 +16,7 @@ export async function POST({ request }) {
 	// 	stretcher: options.stretcher
 	// };
 	//const description = `Color: ${options.color}, Back: ${options.back}`;
-    const description = "A beautiful shoe"
+    const description = "A beautiful shoe!"
 
 	// create a checkout
 	const checkout = await stripe.checkout.sessions.create({
@@ -31,7 +31,7 @@ export async function POST({ request }) {
 					currency: 'usd',
 					unit_amount: 7900,
 					product_data: {
-						name: 'Custom Shoe yay',
+						name: 'Custom Shoe',
 						description
 						//metadata
 					}
