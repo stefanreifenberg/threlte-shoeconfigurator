@@ -4,6 +4,25 @@
     import ColorPicker from 'svelte-awesome-color-picker';
 
     let hex;
+    let loading = false;
+
+    async function buy() {
+		loading = true;
+		const response = await fetch('/checkout', {
+			method: 'POST',
+			body: JSON.stringify({
+				quantity: 1,
+				options: {
+					color: selectedColor.name,
+					back: selectedBack.name,
+					stretcher
+				}
+			})
+		});
+		const { url } = await response.json();
+		window.location.href = url;
+		setTimeout(() => loading = false)
+	}
 </script>
   
 <div class="canvas-wrapper">
@@ -16,6 +35,17 @@
     <ColorPicker bind:hex label="Pick a color 
     " isOpen isPopup={false} isAlpha={false}/>
 </div>
+
+<section class="cta">
+	<button on:click={buy} class:loading disabled={loading}>
+		{#if loading}
+			Please wait...
+		{:else}
+			Buy now
+		{/if}
+	</button>
+</section>
+
 
 <style lang="">
 .canvas-wrapper {
@@ -86,5 +116,39 @@
 
 }
 
+.cta {
+		position: fixed;
+		bottom: 0px;
+		width: 100vw;
+		padding: 1rem;
+	}
+	.cta button {
+		background: #6e37ca;
+		color: white;
+		font-size: 1.3rem;
+		border: none;
+		border-radius: 3px;
+		padding: 1rem;
+		width: 100%;
+	}
+	.cta button:hover {
+		background: #8460bf;
+	}
+	@media screen and (min-width: 480px) {
+		
+	}
+	@media screen and (min-width: 768px) {
+		.cta {
+			right: 0px;
+			width: 200px;
+		}
+	}
+	@media screen and (min-width: 1024px) {
+		.cta {
+			right: 0px;
+			top: 0px;
+			width: 200px;
+		}
+	}
 </style>
   
