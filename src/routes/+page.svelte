@@ -28,8 +28,7 @@
 </div>
 
 <div class="color-picker-div">
-    <ColorPicker bind:hex label="Pick a color and start designing
-    " isOpen={true} isPopup={false} isAlpha={false} isTextInput={false}/>
+    <ColorPicker bind:hex label="" isOpen={true} isPopup={false} isAlpha={false} isTextInput={false}/>
 </div>
 
 <section class="cta">
