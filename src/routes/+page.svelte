@@ -1,5 +1,5 @@
 <script>
-    import { Canvas, InteractiveObject, OrbitControls, T } from '@threlte/core'
+    import { Canvas } from '@threlte/core'
     import Scene from '../lib/Scene.svelte'
     import ColorPicker from 'svelte-awesome-color-picker';
     
@@ -35,13 +35,12 @@
 <section class="cta">
 	<button on:click={buy} class:loading disabled={loading}>
 		{#if loading}
-			Please wait...
+			Loading
 		{:else}
 			Buy now
 		{/if}
 	</button>
 </section>
-
 
 <style lang="">
 .canvas-wrapper {

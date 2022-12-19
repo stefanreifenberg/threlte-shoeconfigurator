@@ -10,9 +10,9 @@ let selectedMesh = null
 let currentColor
 let currentMeshName = ''
 
-  const { gltf } = useGltf('/shoe-draco.glb', {
-    useDraco: true
-  })
+const { gltf } = useGltf('/shoe-draco.glb', {
+useDraco: true
+})
 
   // onClick
     const onClick = (e) => {
