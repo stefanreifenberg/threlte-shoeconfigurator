@@ -6,6 +6,7 @@
     $: hex = '#ffffff';
     let loading = false;
 
+
     async function buy() {
 		loading = true;
 		const response = await fetch('/checkout', {
@@ -28,7 +29,7 @@
 
 <div class="color-picker-div">
     <ColorPicker bind:hex label="Pick a color and start designing
-    " isOpen={false} isPopup={false} isAlpha={false} isTextInput={false}/>
+    " isOpen={true} isPopup={false} isAlpha={false} isTextInput={false}/>
 </div>
 
 <section class="cta">
@@ -81,7 +82,7 @@
 @media only screen and (max-width: 600px) {
     .color-picker-div {
         position: fixed;
-        top: 80%;
+        top: 75%;
         left: 15%;
         width: 300px;
     }
@@ -120,6 +121,7 @@
 	}
 	.cta button {
 		background: white;
+        font-family: "West";
 		color: black;
 		font-size: 1.3rem;
 		border: 1px solid #8460bf;

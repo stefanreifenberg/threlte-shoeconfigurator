@@ -4,9 +4,28 @@
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=device-width" />
+
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
 </html>
+
+<style>
+	@font-face {
+	  font-family: "Pangea";
+	  font-weight: normal;
+	  src: url("fonts/pangea/PangeaAfrikan-Regular.otf") format("otf"),
+	  url("fonts/pangea/PangeaAfrikan-Regular.otf") format("otf");
+	}
+	@font-face {
+	  font-family: "West";
+	  font-weight: bold;
+	  src: url("fonts/West/West-Bold.otf") format("otf"),
+	  url("fonts/West/West-Bold.otf") format("otf");
+	}
+	body {
+	  font-family: "West", sans-serif;
+	}
+	</style>
