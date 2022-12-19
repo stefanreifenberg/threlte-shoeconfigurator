@@ -66,14 +66,14 @@ const createRandomColors = () => {
 </script>
 
 
-<HTML position={{x:0.5, y: 1 }} transform>
+<!-- <HTML position={{x:0.5, y: 1 }} transform>
     <button
       on:click={createRandomColors}
       class="random-button hover:opacity-90 active:opacity-70"
     >
       Randomize colors
     </button>
-</HTML>
+</HTML> -->
 
 {#if $gltf}
  <Float>
@@ -231,7 +231,7 @@ const createRandomColors = () => {
 {/if}
 
 <ContactShadows scale={5} blur={2.4} far={2.5} opacity={0.4} position={{ y: -1 }}/>
-<!-- <Environment path="/hdr/" files="potsdamer_platz_1k.hdr" isBackground={false}/> -->
+<Environment path="/hdr/" files="potsdamer_platz_1k.hdr" isBackground={false}/>
 <T.AmbientLight intensity={0.7} />
 <T.SpotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} castShadow />
 

@@ -27,8 +27,8 @@
 </div>
 
 <div class="color-picker-div">
-    <ColorPicker bind:hex label="Pick a color and apply it to the model 
-    " isOpen={false} isPopup={false} isAlpha={false}/>
+    <ColorPicker bind:hex label="Pick a color and start designing
+    " isOpen={false} isPopup={false} isAlpha={false} isTextInput={false}/>
 </div>
 
 <section class="cta">
@@ -81,8 +81,8 @@
 @media only screen and (max-width: 600px) {
     .color-picker-div {
         position: fixed;
-        top: 70%;
-        left: 25%;
+        top: 80%;
+        left: 15%;
         width: 300px;
     }
 
@@ -107,15 +107,16 @@
     :global(.color-picker) {
         --picker-width: 100px;
         --picker-height: 100px;
-    }
+    }   
 
 }
 
 .cta {
-		position: fixed;
-		bottom: 0px;
-		width: 100vw;
-		padding: 1rem;
+        position:fixed;
+        top: 20px;
+        left: 0;
+        transform: translate(calc(50vw - 50%));
+        width: 80vw;
 	}
 	.cta button {
 		background: white;
@@ -130,19 +131,18 @@
 		background: #8460bf;
         color: white;
 	}
-	@media screen and (min-width: 480px) {
-		
-	}
+	
 	@media screen and (min-width: 768px) {
 		.cta {
 			right: 0px;
+            top: 20px;
 			width: 200px;
 		}
 	}
 	@media screen and (min-width: 1024px) {
 		.cta {
 			right: 0px;
-			top: 0px;
+			top: 20px;
 			width: 200px;
 		}
 	}
