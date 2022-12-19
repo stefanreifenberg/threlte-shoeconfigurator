@@ -2,78 +2,50 @@
 import { T, OrbitControls, InteractiveObject } from '@threlte/core'
 import { GLTF, Float, ContactShadows, Environment, HTML, Text, useGltf, useCursor } from '@threlte/extras';
 import { MeshStandardMaterial, Color } from 'three';
-import { writable } from 'svelte/store'
-
 export let color
 
-// additional features
- // create random colors for all
- // show color in text in a list
- // on click copy color to clipboard
-
- // create a random hex color including a leading #
- const randomHex = () => '#' + Math.floor(Math.random() * 16777215).toString(16)
-
-const createRandomColors = () => {
-    // get all meshes
-    const materials = $gltf?.materials
-
-    // loop through all materials
-    for (const material in materials) {
-        console.log('material', material)
-        // set random color
-        materials[material].color = new Color(randomHex())
-    }
-}
+$: newColor = color
+let selectedMesh = null
+let currentColor
+let currentMeshName = ''
 
   const { gltf } = useGltf('/shoe-draco.glb', {
     useDraco: true
   })
-  
-
 
   // onClick
     const onClick = (e) => {
-        e.detail.object.material.color = new Color(color);
+        selectedMesh = e.detail.object
+        console.log('click', e.detail.object.material.name)
+        currentMeshName = e.detail.object.material.name
+        currentColor = e.detail.object.material.color
+        newColor = currentColor
+    }
+
+    // change the color of the selected mesh
+    $: if (selectedMesh) {
+        selectedMesh.material.color = new Color(newColor);
     }
 
     // onPointerEnter
     const onPointerEnter = (e) => {
-        console.log('enter', e.detail.object.material.color)
+        //console.log('enter', e.detail.object.material.color)
         //e.detail.object.material.color = new Color(0x000000);
     }
 
     // onPointerLeave
     const onPointerLeave = (e) => {
-        console.log('leave')
+        //console.log('leave')
         //e.detail.object.material.color = new Color(0xffffff);
     }
 
     const { onPointerEnter: cursorEnter, onPointerLeave: cursorLeave  } = useCursor();
-
-    // $: if ($hovering) {
-    //     //get the current material of the hovered object
-    //     console.log('hovering', $hovering)
-    //     // get the current hovered mesh
-    //     const mesh = $hovering.object;
-
-    // }
-    // else {
-    //     //material.color = new Color(0xc62004);
-    // }
-
-    
 </script>
 
 
-<!-- <HTML position={{x:0.5, y: 1 }} transform>
-    <button
-      on:click={createRandomColors}
-      class="random-button hover:opacity-90 active:opacity-70"
-    >
-      Randomize colors
-    </button>
-</HTML> -->
+<HTML position={{y: 1 }} transform>
+   <h2>{currentMeshName}</h2>
+</HTML>
 
 {#if $gltf}
  <Float>

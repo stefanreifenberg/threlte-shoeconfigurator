@@ -2,8 +2,8 @@
     import { Canvas, InteractiveObject, OrbitControls, T } from '@threlte/core'
     import Scene from '../lib/Scene.svelte'
     import ColorPicker from 'svelte-awesome-color-picker';
-
-    let hex;
+    
+    $: hex = '#ffffff';
     let loading = false;
 
     async function buy() {
