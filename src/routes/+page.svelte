@@ -5,8 +5,7 @@
     
     $: hex = '#ffffff';
     let loading = false;
-
-
+    
     async function buy() {
 		loading = true;
 		const response = await fetch('/checkout', {
@@ -20,15 +19,14 @@
 		setTimeout(() => loading = false)
 	}
 </script>
-  
+
 <div class="canvas-wrapper">
+    <div class="color-picker-div">
+        <ColorPicker bind:hex label="" isOpen={true} isPopup={false} isAlpha={false} isTextInput={false}/>
+    </div>
     <Canvas>
         <Scene color={hex} />
     </Canvas>
-</div>
-
-<div class="color-picker-div">
-    <ColorPicker bind:hex label="" isOpen={true} isPopup={false} isAlpha={false} isTextInput={false}/>
 </div>
 
 <section class="cta">
@@ -41,9 +39,9 @@
 	</button>
 </section>
 
-<style lang="">
+<style>
 .canvas-wrapper {
-    position: fixed;
+    position: relative;
     top: 0;
     left:0;
     width: 100vw;
@@ -56,9 +54,10 @@
 
 .color-picker-div {
         position: fixed;
-        top: 45%;
+        top: 80%;
         left: 10%;
         width: 300px;
+        z-index: 1000;
 }
 
 :global(.color-picker > label) {
