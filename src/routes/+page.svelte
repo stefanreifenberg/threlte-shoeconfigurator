@@ -5,7 +5,7 @@
     
     $: hex = '#ffffff';
     let loading = false;
-    
+
     async function buy() {
 		loading = true;
 		const response = await fetch('/checkout', {
@@ -20,14 +20,19 @@
 	}
 </script>
 
-<div class="canvas-wrapper">
-    <div class="color-picker-div">
-        <ColorPicker bind:hex label="" isOpen={true} isPopup={false} isAlpha={false} isTextInput={false}/>
+<section class="canvas">
+    
+    <div class="canvas-wrapper">
+        <Canvas>
+            <Scene color={hex} />
+        </Canvas>
     </div>
-    <Canvas>
-        <Scene color={hex} />
-    </Canvas>
+</section>
+
+<div class="color-picker-div">
+    <ColorPicker bind:hex label="" isOpen={true} isPopup={false} isAlpha={false} isTextInput={false}/>
 </div>
+
 
 <section class="cta">
 	<button on:click={buy} class:loading disabled={loading}>
@@ -54,8 +59,8 @@
 
 .color-picker-div {
         position: fixed;
-        top: 80%;
-        left: 10%;
+        top: 50%;
+        left: 5%;
         width: 300px;
         z-index: 1000;
 }
@@ -77,6 +82,18 @@
 
 /* mobile styles for the color picker */
 @media only screen and (max-width: 600px) {
+    :global(canvas) {
+        width: 100vw !important;
+        height: 100vh !important;
+    }
+
+    .canvas-wrapper {
+        position: relative;
+        top: 0;
+        left:0;
+        width: 100vw;
+        height: 100vh;
+    }
     .color-picker-div {
         position: fixed;
         top: 75%;
@@ -87,7 +104,6 @@
     :global(.color-picker > label) {
         font-size: 20px;
     }
-
 
     :global(.color-picker > label > div) {
         width: 1em;
