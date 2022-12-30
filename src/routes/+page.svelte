@@ -2,10 +2,12 @@
     import { Canvas } from '@threlte/core'
     import Scene from '../lib/Scene.svelte'
     import ColorPicker from 'svelte-awesome-color-picker';
+    import { storeSelectedMesh } from '../store/store';
     
     $: hex = '#ffffff';
-    let loading = false;
 
+    let loading = false;
+   
     async function buy() {
 		loading = true;
 		const response = await fetch('/checkout', {
@@ -20,19 +22,19 @@
 	}
 </script>
 
-<section class="canvas">
-    
-    <div class="canvas-wrapper">
-        <Canvas>
-            <Scene color={hex} />
-        </Canvas>
-    </div>
-</section>
+{#if $storeSelectedMesh}
+    <h1>{$storeSelectedMesh}</h1>
+{/if}
+
+<div class="canvas-wrapper">
+    <Canvas>
+        <Scene color={hex}/>
+    </Canvas>
+</div>
 
 <div class="color-picker-div">
     <ColorPicker bind:hex label="" isOpen={true} isPopup={false} isAlpha={false} isTextInput={false}/>
 </div>
-
 
 <section class="cta">
 	<button on:click={buy} class:loading disabled={loading}>
@@ -45,16 +47,13 @@
 </section>
 
 <style>
+
 .canvas-wrapper {
-    position: relative;
+    position: fixed;
     top: 0;
     left:0;
     width: 100vw;
     height: 100vh;
-}
-
-:global(.canvas-wrapper canvas) {
-    position: absolute;
 }
 
 .color-picker-div {
@@ -62,7 +61,7 @@
         top: 50%;
         left: 5%;
         width: 300px;
-        z-index: 1000;
+        z-index: 100;
 }
 
 :global(.color-picker > label) {
@@ -82,18 +81,7 @@
 
 /* mobile styles for the color picker */
 @media only screen and (max-width: 600px) {
-    :global(canvas) {
-        width: 100vw !important;
-        height: 100vh !important;
-    }
-
-    .canvas-wrapper {
-        position: relative;
-        top: 0;
-        left:0;
-        width: 100vw;
-        height: 100vh;
-    }
+    
     .color-picker-div {
         position: fixed;
         top: 75%;
@@ -128,23 +116,24 @@
 .cta {
         position:fixed;
         top: 20px;
-        left: 0;
-        transform: translate(calc(50vw - 50%));
-        width: 80vw;
+        right: 20px;
+       
 	}
 	.cta button {
-		background: white;
+		background: darkred;
         font-family: "West";
-		color: black;
+		color: white;
 		font-size: 1.3rem;
-		border: 1px solid #8460bf;
+		border: 1px solid darkred;
 		border-radius: 3px;
 		padding: 1rem;
 		width: 100%;
 	}
+
 	.cta button:hover {
-		background: #8460bf;
+		background: rgb(163, 17, 17);
         color: white;
+        cursor: pointer;
 	}
 	
 	@media screen and (min-width: 768px) {
@@ -156,7 +145,7 @@
 	}
 	@media screen and (min-width: 1024px) {
 		.cta {
-			right: 0px;
+			right: 20px;
 			top: 20px;
 			width: 200px;
 		}

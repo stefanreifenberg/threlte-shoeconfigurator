@@ -1,14 +1,15 @@
 <script>
 import { T, OrbitControls, InteractiveObject } from '@threlte/core'
-import { Float, ContactShadows, Environment, HTML, useGltf, useCursor } from '@threlte/extras';
+import { Float, ContactShadows, HTML, useGltf } from '@threlte/extras';
 import { Color } from 'three';
+import { storeSelectedMesh } from '../store/store';
 
 export let color
 
 $: nodes = $gltf?.nodes;
 $: materials = $gltf?.materials;
-
 $: newColor = color
+
 let selectedMesh = null
 let currentColor
 let currentMeshName = ''
@@ -19,10 +20,11 @@ const { gltf } = useGltf('/shoe-draco.glb', {
     useDraco: true
 })
 
-// onClick
 const onClick = (e) => {
     selectedMesh = e.detail.object
     currentMeshName = e.detail.object.material.name
+    // set the selected mesh to the store
+    storeSelectedMesh.set(currentMeshName)
     currentColor = e.detail.object.material.color
     newColor = currentColor
 }
@@ -41,13 +43,6 @@ const onPointerEnter = (e) => {
     hoveredMeshColor = hoveredMeshColor.getHexString()
 }
 
-    // // onPointerLeave
-    // const onPointerLeave = (e) => {
-    //     hoveredMesh = null
-    //     hovered = null
-    // }
-
-    //const { onPointerEnter: cursorEnter, onPointerLeave: cursorLeave  } = useCursor();
 
 $: if (hoveredMesh) {
     const cursor = `<svg width="64" height="64" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0)"><path fill="rgba(255, 255, 255, 0.5)" d="M29.5 54C43.031 54 54 43.031 54 29.5S43.031 5 29.5 5 5 15.969 5 29.5 15.969 54 29.5 54z" stroke="#000"/><g filter="url(#filter0_d)"><path d="M29.5 47C39.165 47 47 39.165 47 29.5S39.165 12 29.5 12 12 19.835 12 29.5 19.835 47 29.5 47z"
@@ -59,15 +54,15 @@ $: if (hoveredMesh) {
 }
 </script>
 
-
-<HTML center position={{y:1}}>
-   <h1>{currentMeshName}</h1>
-</HTML>
+<HTML position={{x:0,y:0,z:0}}>
+    <h1>{currentMeshName}</h1>
+ </HTML>
 
 {#if $gltf}
  <Float>
    
   <T.Group position={[0, 0, 0]}>
+    
     <!-- Laces -->
     <T.Mesh 
         let:ref 
@@ -80,7 +75,7 @@ $: if (hoveredMesh) {
             interactive 
             on:click={onClick} 
             on:pointerenter={onPointerEnter}
-			on:pointerleave={() => (hovered = null)}
+			on:pointerleave={() => (hoveredMesh = null)}
             />
     </T.Mesh>
     
@@ -97,7 +92,7 @@ $: if (hoveredMesh) {
         interactive 
         on:click={onClick}
         on:pointerenter={onPointerEnter}
-		on:pointerleave={() => (hovered = null)}
+		on:pointerleave={() => (hoveredMesh = null)}
     />
     </T.Mesh>
     
@@ -114,7 +109,7 @@ $: if (hoveredMesh) {
             interactive 
             on:click={onClick}
             on:pointerenter={onPointerEnter}
-			on:pointerleave={() => (hovered = null)}
+			on:pointerleave={() => (hoveredMesh = null)}
             />
     </T.Mesh>
     
@@ -131,7 +126,7 @@ $: if (hoveredMesh) {
             interactive 
             on:click={onClick}
             on:pointerenter={onPointerEnter}
-			on:pointerleave={() => (hovered = null)}
+			on:pointerleave={() => (hoveredMesh = null)}
             />
     </T.Mesh>
     
@@ -147,7 +142,7 @@ $: if (hoveredMesh) {
             interactive 
             on:click={onClick}
             on:pointerenter={onPointerEnter}
-			on:pointerleave={() => (hovered = null)}
+			on:pointerleave={() => (hoveredMesh = null)}
             />
     </T.Mesh>
 
@@ -164,7 +159,7 @@ $: if (hoveredMesh) {
             interactive 
             on:click={onClick}
             on:pointerenter={onPointerEnter}
-			on:pointerleave={() => (hovered = null)}
+			on:pointerleave={() => (hoveredMesh = null)}
             />
     </T.Mesh>
    
@@ -180,7 +175,7 @@ $: if (hoveredMesh) {
             interactive 
             on:click={onClick}
             on:pointerenter={onPointerEnter}
-			on:pointerleave={() => (hovered = null)}
+			on:pointerleave={() => (hoveredMesh = null)}
             />
     </T.Mesh>
     <!-- Patch -->
@@ -195,7 +190,7 @@ $: if (hoveredMesh) {
             interactive 
             on:click={onClick}
             on:pointerenter={onPointerEnter}
-			on:pointerleave={() => (hovered = null)}
+			on:pointerleave={() => (hoveredMesh = null)}
             />
     </T.Mesh>
     
@@ -220,8 +215,10 @@ $: if (hoveredMesh) {
 <style>
     h1 {
         font-size: 8em;
+        z-index: 1000;
         
     }
+
     @media only screen and (max-width: 600px) {
         h1 {
             font-size: 5em;
