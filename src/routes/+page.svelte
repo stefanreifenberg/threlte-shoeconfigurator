@@ -23,7 +23,9 @@
 </script>
 
 {#if $storeSelectedMesh}
-    <h1>{$storeSelectedMesh}</h1>
+    <div class="selected-mesh">
+        <h1>{$storeSelectedMesh}</h1>
+    </div>
 {/if}
 
 <div class="canvas-wrapper">
@@ -64,6 +66,16 @@
         z-index: 100;
 }
 
+/* center the selected mesh */
+.selected-mesh {
+    position: fixed;
+    font-size: 4em;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
+
 :global(.color-picker > label) {
     font-size: 20px;
 }
@@ -81,6 +93,9 @@
 
 /* mobile styles for the color picker */
 @media only screen and (max-width: 600px) {
+    .selected-mesh {
+        font-size: 2em;
+    }
     
     .color-picker-div {
         position: fixed;
@@ -89,19 +104,6 @@
         width: 300px;
     }
 
-    :global(.color-picker > label) {
-        font-size: 20px;
-    }
-
-    :global(.color-picker > label > div) {
-        width: 1em;
-        height: 1em;
-    }
-
-    :global(.color-picker > label > div > input) {
-        width: 5em;
-        height: 5em;
-    }
     :global(.picker-wrapper ) {
         width: 100px !important;
         height: 100px !important;
