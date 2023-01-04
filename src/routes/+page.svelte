@@ -5,11 +5,9 @@
     import { storeSelectedMesh } from '../store/store';
     
     $: hex = '#ffffff';
-
-    let loading = false;
    
     async function buy() {
-		loading = true;
+		
 		const response = await fetch('/checkout', {
 			method: 'POST',
 			body: JSON.stringify({
@@ -18,7 +16,6 @@
 		});
 		const { url } = await response.json();
 		window.location.href = url;
-		setTimeout(() => loading = false)
 	}
 </script>
 
@@ -38,15 +35,11 @@
     <ColorPicker bind:hex label="" isOpen={true} isPopup={false} isAlpha={false} isTextInput={false}/>
 </div>
 
-<section class="cta">
-	<button on:click={buy} class:loading disabled={loading}>
-		{#if loading}
-			Loading
-		{:else}
-			Buy now
-		{/if}
+<div class="cta">
+	<button on:click={buy}>
+		Buy now
 	</button>
-</section>
+</div>
 
 <style>
 
@@ -80,7 +73,6 @@
     font-size: 20px;
 }
 
-
 :global(.color-picker > label > div) {
     width: 3em;
     height: 3em;
@@ -99,7 +91,7 @@
     
     .color-picker-div {
         position: fixed;
-        top: 75%;
+        top: 70%;
         left: 15%;
         width: 300px;
     }
@@ -111,8 +103,7 @@
     :global(.color-picker) {
         --picker-width: 100px;
         --picker-height: 100px;
-    }   
-
+    }
 }
 
 .cta {
@@ -121,21 +112,22 @@
         right: 20px;
        
 	}
-	.cta button {
-		background: darkred;
-        font-family: "West";
-		color: white;
-		font-size: 1.3rem;
-		border: 1px solid darkred;
-		border-radius: 3px;
-		padding: 1rem;
-		width: 100%;
-	}
 
-	.cta button:hover {
-		background: rgb(163, 17, 17);
-        color: white;
-        cursor: pointer;
+.cta button {
+    background: darkred;
+    font-family: "West";
+    color: white;
+    font-size: 1.3rem;
+    border: 1px solid darkred;
+    border-radius: 3px;
+    padding: 1rem;
+    width: 100%;
+}
+
+.cta button:hover {
+    background: rgb(163, 17, 17);
+    color: white;
+    cursor: pointer;
 	}
 	
 	@media screen and (min-width: 768px) {
@@ -153,4 +145,3 @@
 		}
 	}
 </style>
-  
